@@ -1,0 +1,12 @@
+a {
+  color: $c-ci;
+
+  &:hover {
+    color: darken($c-ci, 8);
+  }
+
+  &:focus {
+    outline: 1px solid $c-ci;
+    outline-offset: 1px;
+  }
+}

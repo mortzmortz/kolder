@@ -1,0 +1,71 @@
+// @mixin fixed-ratio();
+//
+// https://github.com/at-import/toolkit/blob/2.x.x/stylesheets/toolkit/_intrinsic-ratio.scss
+//
+// Padding is applied to :after element
+//
+// Usage (Defaults): @include fixed-ratio(4/3, 'img, figure', 'top');
+//
+// For shorter syntax see defaults below
+//
+
+$ratio: 16/9 !default;
+$ratio-elements: '> *' !default;
+$ratio-direction: bottom !default;
+$ratio-extend: true !default;
+
+@mixin ratio-parent($extend: $ratio-extend) {
+    @if $extend {
+        @extend %ratio-parent;
+    }
+    @else {
+        position: relative;
+        &:after {
+            content: '';
+            display: block;
+            height: 0;
+        }
+    }
+}
+
+@mixin ratio-child($extend: $ratio-extend) {
+    @if $extend {
+        @extend %ratio-child;
+    }
+    @else {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@mixin ratio-padding($ratio: $ratio, $direction: $ratio-direction) {
+    padding-#{$direction}: (1 / $ratio) * 100%;
+}
+
+@mixin ratio($ratio: $ratio, $elements: $ratio-elements, $direction: $ratio-direction, $extend: $ratio-extend) {
+    @include ratio-parent($extend);
+    &:after {
+        @include ratio-padding($ratio, $direction);
+    }
+
+    @each $element in $elements {
+        #{$element} {
+            @include ratio-child($extend);
+        }
+    }
+}
+
+@mixin fixed-ratio($ratio: $ratio, $elements: $ratio-elements, $direction: $ratio-direction, $extend: $ratio-extend) {
+    @include ratio($ratio, $elements, $direction, $extend);
+}
+
+%ratio-parent {
+    @include ratio-parent(false);
+}
+
+%ratio-child {
+    @include ratio-child(false);
+}

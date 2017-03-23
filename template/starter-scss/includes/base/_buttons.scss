@@ -1,0 +1,51 @@
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  -webkit-appearance: button;
+}
+
+a.button,
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  display: inline-flex;
+  vertical-align: top;
+  font-size: 1rem;
+  text-align: center;
+  color: $c-white;
+  background-color: $c-ci;
+  margin-bottom: $space;
+  padding: $pad-half $pad;
+  white-space: nowrap;
+  text-decoration: none;
+  border: 1px solid $c-ci;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: darken($c-ci, 4);
+    border-color: darken($c-ci, 4);
+    color: $c-white;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+a.button.button-primary,
+button.button-primary,
+input[type="submit"].button-primary,
+input[type="button"].button-primary,
+input[type="reset"].button-primary {
+  border-color: $c-black;
+  background-color: $c-black;
+  color: $c-white;
+  &:hover {
+    background-color: lighten($c-black, 24);
+    border-color: lighten($c-black, 24);
+  }
+}

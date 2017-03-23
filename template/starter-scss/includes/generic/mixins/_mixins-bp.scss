@@ -1,0 +1,42 @@
+// Mobile ---------------------------------------------------------------------
+@mixin for-mobile-only {
+    @media (max-width: #{$mobile-max}) { @content; }
+}
+
+// Tablet Portrait ------------------------------------------------------------
+@mixin for-tablet-portrait-up {
+    @media (min-width: #{$tablet-portrait-min}) { @content; }
+}
+@mixin for-tablet-portait-only {
+    @media (min-width: #{$tablet-portrait-min}) and (max-width: #{$tablet-portrait-max}) { @content; }
+}
+@mixin for-tablet-portrait-max {
+    @media (max-width: #{$tablet-portrait-max}) { @content; }
+}
+
+// Tablet Landscape -----------------------------------------------------------
+@mixin for-tablet-landscape-up {
+    @media (min-width: #{$tablet-landscape-min}) { @content; }
+}
+@mixin for-tablet-landscape-only {
+    @media (min-width: #{$tablet-landscape-min}) and (max-width: #{$tablet-landscape-max}) { @content; }
+}
+@mixin for-tablet-landscape-max {
+    @media (max-width: #{$tablet-landscape-max}) { @content; }
+}
+
+// Desktop --------------------------------------------------------------------
+@mixin for-desktop-up {
+    @media (min-width: #{$desktop-min}) { @content; }
+}
+@mixin for-desktop-only {
+    @media (min-width: #{$desktop-min}) and (max-width: #{$max-width}) { @content; }
+}
+
+// Max Width --------------------------------------------------------------------
+@mixin for-max-width-max {
+    @media (max-width: #{$max-width}) { @content; }
+}
+@mixin for-max-width-up {
+    @media (min-width: #{$max-width-up}) { @content; }
+}

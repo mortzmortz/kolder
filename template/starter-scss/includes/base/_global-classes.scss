@@ -1,0 +1,13 @@
+.is-fixed {
+  position: fixed;
+  overflow: hidden;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.is-invisible {
+  visibility: hidden;
+  pointer-events: none;
+}

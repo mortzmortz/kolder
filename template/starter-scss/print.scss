@@ -1,0 +1,48 @@
+@page {
+    margin: 0.5cm;
+}
+
+*, *:before, *:after {
+    background: #FFF none !important;
+    color: #000;
+    box-shadow: none;
+}
+
+/* set font */
+body {
+    color: #000 !important;
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    font-size: 1rem;
+}
+
+/* basic font */
+h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5 {
+    color: #000;
+    font-weight: 400;
+}
+h1,.h1 { font-size: 200%; }
+h2,.h2 { font-size: 150%; }
+h3,.h3 { font-size: 115%; }
+h4,.h4 { font-size: 100%; }
+h5,.h5 { font-size: 100%; }
+h6,.h6 { font-size: 100%; }
+
+p {
+    font-size: 12pt;
+    margin: 0;
+}
+
+/* basic links */
+a:link, a:visited {
+    color: #000 !important;
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    text-decoration: underline;
+
+    &:after {
+        content: " (" attr(href) ")";
+    }
+}
+
+.noprint {
+    display: none;
+}

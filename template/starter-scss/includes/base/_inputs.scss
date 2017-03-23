@@ -1,0 +1,40 @@
+// Label //--------------------------------------------------------------------
+label {
+  color: $c-black;
+  display: block;
+  font-weight: bold;
+  font-size: .8rem;
+}
+
+label:not(:last-child) {
+  margin-bottom: $space-half;
+}
+
+// Inputs //-------------------------------------------------------------------
+input[type="text"],
+input[type="email"],
+textarea {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: $pad-half;
+  font-size: 1rem;
+  color: $c-black;
+  border-radius: 3px;
+  border: 1px solid $c-black;
+  box-shadow: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+input[type='text'],
+input[type='email'] {
+  -webkit-appearance: none;
+}
+
+textarea {
+  max-width: 100%;
+  line-height: 1.5;
+}

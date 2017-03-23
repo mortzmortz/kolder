@@ -1,0 +1,26 @@
+h1, h2, h3, h4, h5, .is-1, .is-2, .is-3, .is-4, .is-5 {
+  color: $c-black;
+  font-weight: normal;
+  line-height: 1.125;
+  margin-bottom: 1rem;
+}
+
+h1, .is-1 { // styles for h1
+  font-size: 2rem;
+}
+
+h2, .is-2 { // styles for h2
+  font-size: 1.8rem;
+}
+
+h3, .is-3 { // styles for h3
+  font-size: 1.6rem;
+}
+
+h4, .is-4 { // styles for h4
+  font-size: 1.4rem;
+}
+
+h5, .is-5 { // styles for h5
+  font-size: 1.2rem;
+}

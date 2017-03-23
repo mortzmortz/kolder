@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0"/>
+    <title>kolder demo</title>
+    <link rel="stylesheet" href="../dist/styles.css" type="text/css">
+    <%_ if (webDemo) { -%>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 100%;
+            list-style: none;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            background-color: #f2f2f2;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+        }
+
+        #demo {
+            display: flex;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+
+        #demo .grid-column figure {
+            background-color: #E8E8E8;
+        }
+
+        #demo .grid-column figure.loaded {
+            background-color: transparent;
+        }
+
+        #demo .grid-column figure img {
+            width: 100%;
+            will-change: opacity;
+            opacity: 0;
+        }
+
+        #demo .grid-column figure.loaded img {
+            transition: opacity 200ms;
+            opacity: 1;
+        }
+    </style>
+    <%_ } -%>
+</head>
+<body>
+
+    <%_ if (type === 'vue') { -%>
+    <p>kolder Vue</p>
+    <%_  } else if (type === 'react') { -%>
+    <p>kolder React</p>
+    <%_  } else if (type === 'web') { -%>
+    <p>kolder Web</p>
+    <%_ } -%>
+
+    <%_ if (type !== 'plain') { -%>
+    <div id="demo"></div>
+    <%_ } -%>
+    
+<script type="text/javascript" async src="../dist/bundle.js"></script>
+</body>
+</html>
