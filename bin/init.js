@@ -160,7 +160,7 @@ module.exports = co.wrap(function * (options) {
     kopyOptions.data = defaults;
   }
 
-  const {files, merged} = yield kopy(_.ownDir('template'), dest, kopyOptions);
+  const {files, merged} = yield kopy(_.ownDir('move'), dest, kopyOptions);
 
   console.log();
 

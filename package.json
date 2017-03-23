@@ -2,14 +2,14 @@
   "name": "kolder",
   "version": "0.1.0",
   "description": "Create new projects with no build configuration.",
-  "repository": "gitlab:gerion/kolder",
+  "repository": "mortzmortz/kolder",
   "bin": {
     "kolder": "bin/kolder.js"
   },
   "files": [
     "bin",
     "lib",
-    "template"
+    "move"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
