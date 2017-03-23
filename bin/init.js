@@ -46,6 +46,18 @@ module.exports = co.wrap(function * (options) {
       }]);
       if (!overWrite) {
         throw new AppError('> Aborted.');
+      } else {
+        const {safeOverWrite} = yield inquirer.prompt([{
+          name: 'safeOverWrite',
+          type: 'confirm',
+          message: `Sorry, I have to ask again. Anyway, sure overwrite?`,
+          default: false
+        }]);
+        if (!safeOverWrite) {
+          throw new AppError('> Aborted.');
+        } else {
+          $.rm('-rf', `${dest}/*`);
+        }
       }
     }
   }
