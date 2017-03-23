@@ -1,5 +1,3 @@
-# kolder
-
 ## tl;dr
 
 ```bash

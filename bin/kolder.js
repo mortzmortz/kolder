@@ -8,7 +8,7 @@ const argv = yargs
   .version(pkg.version)
   .alias('h', 'help')
   .alias('v', 'version')
-  .epilogue('for more information, visit future GitHub page')
+  .epilogue('for more information, visit https://github.com/mortzmortz/koldere')
   .help()
   .argv;
 
