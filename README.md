@@ -7,7 +7,7 @@ cd my-project
 yarn dev
 ```
 
-And then you can go to `http://localhost:3000` and start coding!
+Go to `http://localhost:3000` and start coding!
 
 Make a minified production build with `yarn build`.
 
