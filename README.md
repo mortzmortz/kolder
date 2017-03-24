@@ -20,11 +20,10 @@ Just create a project and start to code.
 
 - **Plain.** Start a project quickly.
 - **Build Web Project.**
-- **Build Vue App**
-- **Build React App**
-- **PostCSS**
-- **Basic Styles** Optionally add basic styles.
-- **Unit Testing** Optionally add AVA (only for web projects yet).
+- **Build Vue App.**
+- **Build React App.**
+- **Basic Styles.** Optionally add basic styles.
+- **Unit Testing.** Optionally add AVA (only for web projects yet).
 
 ## Requirements
 
