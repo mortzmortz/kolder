@@ -3,6 +3,6 @@ body {
 }
 
 html {
-  @include font($font-text, 400, $font-size-lg);
+  @include font($font-text, $font-weight-3, $font-size-lg);
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

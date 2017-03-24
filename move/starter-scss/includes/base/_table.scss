@@ -1,3 +1,7 @@
+th {
+  font-weight: $font-weight-5;
+}
+
 th:first-child,
 td:first-child {
   padding-left: 0;
@@ -11,5 +15,5 @@ th,
 td {
   padding: .5rem 1rem;
   text-align: left;
-  border-bottom: 1px solid $c-grey-light;
+  border-bottom: 1px solid $c-grey-light-1;
 }

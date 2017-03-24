@@ -13,10 +13,10 @@ input[type="reset"] {
   display: inline-flex;
   vertical-align: top;
   font-size: 1rem;
+  font-weight: $font-weight-5;
   text-align: center;
   color: $c-white;
   background-color: $c-ci;
-  margin-bottom: $space;
   padding: $pad-half $pad;
   white-space: nowrap;
   text-decoration: none;
@@ -25,14 +25,16 @@ input[type="reset"] {
   cursor: pointer;
   user-select: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: darken($c-ci, 4);
     border-color: darken($c-ci, 4);
     color: $c-white;
+    outline: none;
   }
 
-  &:focus {
-    outline: none;
+  &:active:not(.button-text) {
+    transform: translateY(1px);
   }
 }
 
@@ -44,8 +46,29 @@ input[type="reset"].button-primary {
   border-color: $c-black;
   background-color: $c-black;
   color: $c-white;
-  &:hover {
+
+  &:hover,
+  &:focus {
     background-color: lighten($c-black, 24);
     border-color: lighten($c-black, 24);
+  }
+}
+
+a.button.button-text,
+button.button-text,
+input[type="submit"].button-text,
+input[type="button"].button-text,
+input[type="reset"].button-text {
+  border: none;
+  background-color: transparent;
+  color: $c-ci;
+  font-size: .8rem;
+  letter-spacing: .0625em;
+  font-weight: $font-weight-5;
+  text-transform: uppercase;
+
+  &:hover,
+  &:focus {
+    color: darken($c-ci, 4);
   }
 }

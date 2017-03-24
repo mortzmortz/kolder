@@ -1,0 +1,49 @@
+body.styleguide {
+  background-color: $c-grey-light-2;
+}
+div.head {
+  display: block;
+  text-align: center;
+  padding-top: 40px;
+  color: $c-grey;
+}
+
+div.styles {
+  margin: 0 auto;
+  padding: 40px 50px;
+  max-width: 1000px;
+}
+
+div.single,
+div.double {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 0 2rem;
+}
+
+div.double {
+  display: flex;
+  flex-wrap: wrap;
+
+  > div {
+    flex-basis: 50%;
+  }
+}
+
+div.asset {
+  display: block;
+  padding: 20px;
+}
+
+div.asset div.info {
+  font-size: .8rem;
+  color: $c-grey;
+  margin-bottom: .5rem;
+}
+
+div.asset div.element {
+  padding: 20px;
+  vertical-align: top;
+  background-color: $c-white;
+  box-shadow: 0px 8px 16px #e4e4e4;
+}
