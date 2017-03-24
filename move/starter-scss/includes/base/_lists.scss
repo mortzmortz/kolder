@@ -1,5 +1,14 @@
 ul {
-  list-style: circle inside;
+  list-style-type: none;
+  margin-left: $space;
+}
+
+ul li:before {
+  content: "-";
+  display: inline-block;
+  color: $c-grey-mid;
+  position: absolute;
+  margin-left: -$space;
 }
 
 ol {
