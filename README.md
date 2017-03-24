@@ -22,6 +22,7 @@ Just create a project and start to code.
 - **Build Web Project.**
 - **Build Vue App**
 - **Build React App**
+- **PostCSS**
 - **Basic Styles** Optionally add basic styles.
 - **Unit Testing** Optionally add AVA (only for web projects yet).
 
@@ -85,6 +86,9 @@ Shows stats with [Webpack Visualizer Plugin](https://chrisbateman.github.io/webp
 Babel Transpiler with following Presets:
 * [es2015](https://babeljs.io/docs/plugins/preset-es2015/)
 * [stage-2](https://babeljs.io/docs/plugins/preset-stage-2/)
+
+#### PostCSS
+Compiles your SCSS based on browserlist settings.
 
 #### ENV Variable
 Use environment variable to execute development only code.
