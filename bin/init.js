@@ -224,7 +224,11 @@ module.exports = co.wrap(function * (options) {
   console.log(chalk.green('- To build for production:'));
   console.log('\n  yarn build\n');
 
-  console.log(chalk.bold(`For more info, please view ${merged.name}/README.md\n`));
+  if (merged.name) {
+    console.log(chalk.bold(`For more info, please view ${merged.name}/README.md\n`));
+  } else {
+    console.log(chalk.bold(`For more info, please view README.md\n`));
+  }
 })
 
 function move(dir, from, to) {
