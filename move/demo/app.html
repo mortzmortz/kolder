@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0"/>
     <title>kolder demo</title>
     <link rel="stylesheet" href="../dist/styles.css" type="text/css">
-    <%_ if (webDemo) { -%>
     <style>
+        <%_ if (webDemo) { -%>
         * {
             margin: 0;
             padding: 0;
@@ -56,17 +56,26 @@
             transition: opacity 200ms;
             opacity: 1;
         }
+        <%_ } -%>
+        <%_ if (!starter) { -%>
+        div.head-kolder {
+            display: block;
+            text-align: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            color: #BDBDBD;
+        }
+        <%_ } -%>
     </style>
-    <%_ } -%>
 </head>
 <body>
 
     <%_ if (type === 'vue') { -%>
-    <p>kolder Vue</p>
+    <div class="head-kolder">kolder vue</div>
     <%_  } else if (type === 'react') { -%>
-    <p>kolder React</p>
+    <div class="head-kolder">kolder react</div>
     <%_  } else if (type === 'web') { -%>
-    <p>kolder Web</p>
+    <div class="head-kolder">kolder demo</div>
     <%_ } -%>
 
     <%_ if (type !== 'plain') { -%>

@@ -1,5 +1,5 @@
 <template>
-	<ul id="grid" :style="{width: `${containerWidth}px`, paddingTop: '120px'}">
+	<ul id="grid" :style="{width: `${containerWidth}px`}">
 		<li v-for="(column, index) in columns" ref="lists" class="grid-column" :style="{width: `${columnWidth}px`, marginRight: `${imgMargin}px`}">
 			<figure v-for="image in column" class="loaded" :style="{marginBottom: `${imgMargin}px`}">
 					<img :src="image.webp">
