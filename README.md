@@ -18,11 +18,12 @@ Just create a project and start to code.
 
 ## Features
 
-- Build Quick Prototype
-- Build Web Project
-- Build Vue App
-- Build React App
-- Optionally unit test with AVA (only for web projects yet)
+- **Plain.** Start a project quickly.
+- **Build Web Project.**
+- **Build Vue App**
+- **Build React App**
+- **Basic Styles** Optionally add basic styles.
+- **Unit Testing** Optionally add AVA (only for web projects yet).
 
 ## Requirements
 
