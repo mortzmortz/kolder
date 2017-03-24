@@ -70,7 +70,8 @@ module.exports = co.wrap(function * (options) {
     starter: false,
     webDemo: false,
     vueStandaloneDemo: false,
-    reactDemo: false
+    reactDemo: false,
+    unit: false
   }, options);
 
   // --type=plain
