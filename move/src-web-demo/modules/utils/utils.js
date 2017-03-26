@@ -25,9 +25,12 @@ export const closest = (el, selector) => {
   return null;
 };
 
+export const noEmptyStringInArray = arr => arr.every(elm => elm !== '');
+
 export const travelObject = (obj, path = []) => {
   let newObj = { ...obj };
-  if (path.length > 1 || path[0] !== '') {
+
+  if (path.length > 1 && noEmptyStringInArray(path)) {
     newObj = path.reduce((str, key) => str[key], newObj);
   }
   return newObj;
