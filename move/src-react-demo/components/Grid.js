@@ -112,7 +112,7 @@ class Grid extends Component {
       width: this.state.containerWidth
     };
     return (
-      <ul style={containerStyle}>
+      <div style={containerStyle}>
         {
           this.state.columns.map((column, index) => {
             const margin = index !== (this.columnCount - 1) ? this.props.imgMargin : 0;
@@ -127,7 +127,7 @@ class Grid extends Component {
             );
           })
         }
-      </ul>
+      </div>
     );
   }
 }

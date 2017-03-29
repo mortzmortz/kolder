@@ -56,6 +56,9 @@ export default class Grid {
       .then((images) => {
         this.images = travelObject(images, this.pathToImages);
         this.initGrid();
+      })
+      .catch((err) => {
+        throw new Error('Could not fetch the images.');
       });
   }
 

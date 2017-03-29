@@ -5,7 +5,7 @@ class Column extends Component {
 
   static get propTypes() {
     return {
-      column: React.PropTypes.object.isRequired,
+      column: React.PropTypes.array.isRequired,
       columnWidth: React.PropTypes.number.isRequired,
       margin: React.PropTypes.number.isRequired,
       imgMargin: React.PropTypes.number.isRequired
@@ -18,7 +18,7 @@ class Column extends Component {
       marginRight: this.props.margin
     };
     return (
-      <li className="grid-column" style={listStyles}>
+      <div className="grid-column" style={listStyles}>
         {
           this.props.column.map((image, index) => {
             return (
@@ -33,7 +33,7 @@ class Column extends Component {
             );
           })
         }
-      </li>
+      </div>
     );
   }
 }
