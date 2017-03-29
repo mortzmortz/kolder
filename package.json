@@ -1,6 +1,6 @@
 {
   "name": "kolder",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Create new projects with no build configuration.",
   "repository": "mortzmortz/kolder",
   "bin": {
