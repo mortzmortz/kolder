@@ -12,6 +12,7 @@ module.exports = {
   <%_ } else if (type === 'react') { -%>
   "extends": "airbnb",
   "plugins": ["react"],
+  "parser": "babel-eslint",
   <%_ } else if (type === 'web' || 'plain') { -%>
   "extends": "airbnb",
   <%_ } -%>
