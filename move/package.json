@@ -46,7 +46,9 @@
     "ava": "^0.18.2",
     <%_ } -%>
     "babel-core": "^6.23.1",
+    <%_ if (type === 'react') { -%>
     "babel-eslint": "^7.2.1",
+    <%_ } -%>
     "babel-loader": "^6.4.0",
     <%_ if (type === 'vue') { -%>
     "babel-plugin-transform-runtime": "^6.23.0",
