@@ -4,4 +4,5 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 
-ReactDOM.render(<App />, document.getElementById('demo'));
+const app = document.getElementById('demo');
+app && ReactDOM.render(<App />, app);

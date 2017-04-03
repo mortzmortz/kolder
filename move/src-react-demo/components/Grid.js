@@ -34,14 +34,12 @@ class Grid extends Component {
       paddingTop: '80px',
       listStyle: 'none'
     };
-    this.state = {
-      columns: [],
-      containerWidth: 0
-    };
-
-    this.setColumns = this.setColumns.bind(this);
-    this.updateImageArr = this.updateImageArr.bind(this);
   }
+
+  state = {
+    columns: [],
+    containerWidth: 0
+  };
 
   componentDidMount() {
     this.outerWidth = this.props.imgWidth + this.props.imgMargin;
@@ -55,7 +53,7 @@ class Grid extends Component {
       });
   }
 
-  setColumns() {
+  setColumns = () => {
     /**
     * calculate the maximum columns we can set
     * based on grid margin and image settings (width and margin)
@@ -78,7 +76,7 @@ class Grid extends Component {
     }
   }
 
-  updateImageArr() {
+  updateImageArr = () => {
     const newColArr = [...this.state.columns];
 
     let i = this.columnCount;
