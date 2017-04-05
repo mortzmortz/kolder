@@ -10,7 +10,7 @@
 }
 
 
-@mixin font($family, $weight:normal, $size:$font-size-desktop) {
+@mixin font($family, $weight:normal, $size:inherit) {
     font-family: $family, sans-serif;
     font-weight: $weight;
     font-size: $size;
