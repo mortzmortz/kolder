@@ -10,27 +10,32 @@ const inquirer = require('inquirer');
 const _ = require('../lib/utils');
 const AppError = require('../lib/app-error');
 
-module.exports = co.wrap(function * (options) {
-
+module.exports = co.wrap(function*(options) {
   const dest = options.name ? _.cwd(options.name) : process.cwd();
 
   if (!options.force && fs.existsSync(dest)) {
     if (!options.name) {
-      const {currentDir} = yield inquirer.prompt([{
-        name: 'currentDir',
-        type: 'confirm',
-        message: `You did not provide a directory. Confirm to overwrite all files at ${chalk.yellow(tildify(dest))}.`,
-        default: false
-      }]);
+      const { currentDir } = yield inquirer.prompt([
+        {
+          name: 'currentDir',
+          type: 'confirm',
+          message: `You did not provide a directory. Confirm to overwrite all files at ${chalk.yellow(
+            tildify(dest)
+          )}.`,
+          default: false
+        }
+      ]);
       if (!currentDir) {
         throw new AppError('> Aborted.');
       } else {
-        const {safeOverWrite} = yield inquirer.prompt([{
-          name: 'safeOverWrite',
-          type: 'confirm',
-          message: `Sorry, I have to ask again. Anyway, sure overwrite?`,
-          default: false
-        }]);
+        const { safeOverWrite } = yield inquirer.prompt([
+          {
+            name: 'safeOverWrite',
+            type: 'confirm',
+            message: `Sorry, I have to ask again. Anyway, sure overwrite?`,
+            default: false
+          }
+        ]);
         if (!safeOverWrite) {
           throw new AppError('> Aborted.');
         } else {
@@ -38,21 +43,27 @@ module.exports = co.wrap(function * (options) {
         }
       }
     } else {
-      const {overWrite} = yield inquirer.prompt([{
-        name: 'overWrite',
-        type: 'confirm',
-        message: `Directory ${chalk.yellow(tildify(dest))} already exists, confirm to overwrite it anyway?`,
-        default: false
-      }]);
+      const { overWrite } = yield inquirer.prompt([
+        {
+          name: 'overWrite',
+          type: 'confirm',
+          message: `Directory ${chalk.yellow(
+            tildify(dest)
+          )} already exists, confirm to overwrite it anyway?`,
+          default: false
+        }
+      ]);
       if (!overWrite) {
         throw new AppError('> Aborted.');
       } else {
-        const {safeOverWrite} = yield inquirer.prompt([{
-          name: 'safeOverWrite',
-          type: 'confirm',
-          message: `Sorry, I have to ask again. Anyway, sure overwrite?`,
-          default: false
-        }]);
+        const { safeOverWrite } = yield inquirer.prompt([
+          {
+            name: 'safeOverWrite',
+            type: 'confirm',
+            message: `Sorry, I have to ask again. Anyway, sure overwrite?`,
+            default: false
+          }
+        ]);
         if (!safeOverWrite) {
           throw new AppError('> Aborted.');
         } else {
@@ -64,20 +75,25 @@ module.exports = co.wrap(function * (options) {
 
   let usePrompts = options.prompts;
 
-  const defaults = Object.assign({
-    type: '',
-    description: `My new Project`,
-    starter: false,
-    webDemo: false,
-    vueStandaloneDemo: false,
-    reactDemo: false,
-    unit: false
-  }, options);
+  const defaults = Object.assign(
+    {
+      type: '',
+      description: `My new Project`,
+      starter: false,
+      webDemo: false,
+      vueStandaloneDemo: false,
+      reactDemo: false,
+      unit: false
+    },
+    options
+  );
 
   // --type=plain
   if (defaults.type === 'plain') {
     usePrompts = false;
-    console.log('> Detected plain project type from CLI arguments, skipped prompts.');
+    console.log(
+      '> Detected plain project type from CLI arguments, skipped prompts.'
+    );
   }
 
   const prompts = [
@@ -95,22 +111,24 @@ module.exports = co.wrap(function * (options) {
       name: 'type',
       type: 'list',
       message: 'Choose the type of your new project:',
-      choices: [{
-        name: 'Plain Project',
-        value: 'plain'
-      },
-      {
-        name: 'Web Project',
-        value: 'web'
-      },
-      {
-        name: 'Vue App',
-        value: 'vue'
-      },
-      {
-        name: 'React App',
-        value: 'react'
-      }]
+      choices: [
+        {
+          name: 'Plain Project',
+          value: 'plain'
+        },
+        {
+          name: 'Web Project',
+          value: 'web'
+        },
+        {
+          name: 'Vue App',
+          value: 'vue'
+        },
+        {
+          name: 'React App',
+          value: 'react'
+        }
+      ]
     },
     {
       name: 'webDemo',
@@ -173,9 +191,7 @@ module.exports = co.wrap(function * (options) {
     kopyOptions.data = defaults;
   }
 
-  const {files, merged} = yield kopy(_.ownDir('move'), dest, kopyOptions);
-
-  console.log();
+  const { files, merged } = yield kopy(_.ownDir('move'), dest, kopyOptions);
 
   for (const file of files) {
     console.log(`${chalk.green('Generating')} · ${file}`);
@@ -200,7 +216,7 @@ module.exports = co.wrap(function * (options) {
   } else if (merged.webDemo || merged.vueStandaloneDemo || merged.reactDemo) {
     move(dest, 'demo-scss', 'src/styles');
   }
-  
+
   if (merged.webDemo) {
     move(dest, 'src-web-demo', 'src/javascripts');
   }
@@ -212,9 +228,15 @@ module.exports = co.wrap(function * (options) {
   }
 
   console.log('\n> Installing dependencies for project:');
-  install({cwd: dest});
+  install({
+    cwd: dest
+  });
 
-  console.log(`\n${chalk.bgGreen.black(' DONE ')} Successfully generated into ${chalk.yellow(tildify(dest))}!\n`);
+  console.log(
+    `\n${chalk.bgGreen.black(
+      ' DONE '
+    )} Successfully generated into ${chalk.yellow(tildify(dest))}!\n`
+  );
 
   console.log(chalk.green('- To get started:'));
   console.log();
@@ -225,11 +247,13 @@ module.exports = co.wrap(function * (options) {
   console.log('\n  yarn build\n');
 
   if (merged.name) {
-    console.log(chalk.bold(`For more info, please view ${merged.name}/README.md\n`));
+    console.log(
+      chalk.bold(`For more info, please view ${merged.name}/README.md\n`)
+    );
   } else {
     console.log(chalk.bold(`For more info, please view README.md\n`));
   }
-})
+});
 
 function move(dir, from, to) {
   console.log(`${chalk.magenta('Moving    ')} · ${from} -> ${to}`);

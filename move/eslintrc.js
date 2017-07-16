@@ -7,7 +7,7 @@ module.exports = {
     "browser": true
   },
   <%_ if (type === 'vue') { -%>
-  "extends": "vue",  
+  "extends": "vue",
   "plugins": ["vue"],
   <%_ } else if (type === 'react') { -%>
   "extends": "airbnb",

@@ -84,7 +84,7 @@ Shows stats with [Webpack Visualizer Plugin](https://chrisbateman.github.io/webp
 #### Babel
 Babel Transpiler with following Presets:
 * [es2015](https://babeljs.io/docs/plugins/preset-es2015/)
-* [stage-2](https://babeljs.io/docs/plugins/preset-stage-2/)
+* [stage-0](https://babeljs.io/docs/plugins/preset-stage-0/)
 
 #### PostCSS
 Compiles your SCSS based on browserlist settings.
