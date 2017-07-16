@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Column from './Column';
 
 class Grid extends Component {
-
   static get propTypes() {
     return {
-      margin: React.PropTypes.number,
-      imgWidth: React.PropTypes.number,
-      imgMargin: React.PropTypes.number,
-      url: React.PropTypes.string.isRequired
+      margin: PropTypes.number,
+      imgWidth: PropTypes.number,
+      imgMargin: PropTypes.number,
+      url: PropTypes.string.isRequired
     };
   }
 
@@ -16,7 +16,7 @@ class Grid extends Component {
     return {
       margin: 48,
       imgWidth: 300,
-      imgMargin: 24,
+      imgMargin: 24
     };
   }
 

@@ -96,9 +96,9 @@
 
 
 
-<style lang="sass">
+<style lang="scss">
 	$c-background: #E8E8E8;
-    
+
 	#grid {
 		display: flex;
 		margin: 0 auto;

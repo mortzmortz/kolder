@@ -5,16 +5,16 @@
 </template>
 
 <script>
-  import Grid from './Grid.vue';
+import Grid from './Grid.vue';
 
-  export default {
-    name: 'app',
-    components: {
-      gridLayout: Grid
-    }
+export default {
+  name: 'app',
+  components: {
+    gridLayout: Grid
   }
+}
 </script>
 
-<style lang="sass">
+<style lang="scss">
 
 </style>

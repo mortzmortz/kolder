@@ -20,16 +20,10 @@
   },
   "babel": {
     "presets": [
-      ["es2015", {
-        "modules": false
-      }],
-      "stage-0"
-      <%_ if (type === 'react') { -%>,
-      "react"
-      <%_ } %>
-      <%_ if (unit) { -%>,
-      "@ava/stage-4"
-      <%_ } %>
+      ["es2015", {"modules": false}],
+      "stage-0"<%_ if (type === 'react') { -%>,
+      "react"<%_ } %><%_ if (unit) { -%>,
+      "@ava/stage-4"<%_ } %>
     ]
   },
   <%_ if (unit) { -%>
@@ -95,7 +89,7 @@
     "sass-loader": "^6.0.6",
     "stats-webpack-plugin": "^0.6.1",
     <%_ if (type === 'vue') { -%>
-    "vue-loader": "^11.1.4",
+    "vue-loader": "^12.2.2",
     "vue-template-compiler": "^2.2.2",
     <%_ } -%>
     "webpack": "^3.3.0",

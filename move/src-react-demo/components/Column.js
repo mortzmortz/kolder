@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Figure from './Figure';
 
 class Column extends Component {
-
   static get propTypes() {
     return {
-      column: React.PropTypes.array.isRequired,
-      columnWidth: React.PropTypes.number.isRequired,
-      margin: React.PropTypes.number.isRequired,
-      imgMargin: React.PropTypes.number.isRequired
+      column: PropTypes.array.isRequired,
+      columnWidth: PropTypes.number.isRequired,
+      margin: PropTypes.number.isRequired,
+      imgMargin: PropTypes.number.isRequired
     };
   }
 
@@ -19,20 +19,18 @@ class Column extends Component {
     };
     return (
       <div className="grid-column" style={listStyles}>
-        {
-          this.props.column.map((image, index) => {
-            return (
-              <Figure
-                key={`fig-${index}`}
-                url={image.url}
-                width={image.width}
-                height={image.height}
-                webp={image.webp}
-                imgMargin={this.props.imgMargin}
-              />
-            );
-          })
-        }
+        {this.props.column.map((image, index) => {
+          return (
+            <Figure
+              key={`fig-${index}`}
+              url={image.url}
+              width={image.width}
+              height={image.height}
+              webp={image.webp}
+              imgMargin={this.props.imgMargin}
+            />
+          );
+        })}
       </div>
     );
   }

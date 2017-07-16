@@ -5,20 +5,20 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return { count: 0 }
-    },
-    methods: {
-      handleClick() {
-        this.count += 20
-      }
+export default {
+  data() {
+    return { count: 0 }
+  },
+  methods: {
+    handleClick() {
+      this.count += 20
     }
   }
+}
 </script>
 
 <style scoped>
-  button {
-    color: #F23;  
-  }
+button {
+  color: #F23;
+}
 </style>

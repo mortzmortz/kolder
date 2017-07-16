@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Figure extends Component {
-
   static get propTypes() {
     return {
-      url: React.PropTypes.string.isRequired,
-      imgMargin: React.PropTypes.number.isRequired
+      url: PropTypes.string.isRequired,
+      imgMargin: PropTypes.number.isRequired
     };
   }
 
