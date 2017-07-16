@@ -88,7 +88,7 @@
     "eslint-plugin-vue": "^2.0.1",
     <%_ } -%>
     "extract-text-webpack-plugin": "^3.0.0",
-    "node-sass": "^4.5.3",
+    "node-sass-chokidar": "^0.0.3",
     "post-compile-webpack-plugin": "^0.1.1",
     "postcss-cli": "^4.1.0",
     "postcss-loader": "^2.0.6",
