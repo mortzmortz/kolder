@@ -1,48 +1,47 @@
 // Settings //-----------------------------------------------------------------
-@import "includes/generic/variables-colors";
-@import "includes/generic/variables-fonts";
-@import "includes/generic/variables-layout";
-@import "includes/generic/variables-paths";
+@import 'includes/generic/variables-colors';
+@import 'includes/generic/variables-fonts';
+@import 'includes/generic/variables-layout';
+@import 'includes/generic/variables-paths';
 
 // Tools //--------------------------------------------------------------------
-@import "includes/generic/mixins/mixins-bp";
-@import "includes/generic/mixins/mixins-font";
-@import "includes/generic/mixins/mixin-aspect-ratio";
-@import "includes/generic/mixins/mixins-image-loading";
+@import 'includes/generic/mixins/mixins-bp';
+@import 'includes/generic/mixins/mixins-font';
+@import 'includes/generic/mixins/mixin-aspect-ratio';
+@import 'includes/generic/mixins/mixins-image-loading';
 
 // Generic //------------------------------------------------------------------
-@import "includes/generic/normalize";
-@import "includes/generic/box-sizing";
+@import 'includes/generic/normalize';
+@import 'includes/generic/box-sizing';
 
 // Fonts & Icons //------------------------------------------------------------
-@import "includes/base/fonts";
-@import "includes/base/icons";
+@import 'includes/base/fonts';
+@import 'includes/base/icons';
 
 // Base Layout //------------------------------------------------------------
-@import "includes/base/main";
-@import "includes/base/layout";
+@import 'includes/base/main';
+@import 'includes/base/layout';
 
 // Base Components //----------------------------------------------------------
-@import "includes/base/blocks";
-
-@import "includes/base/buttons";
-@import "includes/base/form";
-@import "includes/base/global-classes";
-@import "includes/base/headings";
-@import "includes/base/inputs";
-@import "includes/base/links";
-@import "includes/base/lists";
-@import "includes/base/media";
-@import "includes/base/table";
-@import "includes/base/text";
+@import 'includes/base/blocks';
+@import 'includes/base/buttons';
+@import 'includes/base/form';
+@import 'includes/base/global-classes';
+@import 'includes/base/headings';
+@import 'includes/base/inputs';
+@import 'includes/base/links';
+@import 'includes/base/lists';
+@import 'includes/base/media';
+@import 'includes/base/table';
+@import 'includes/base/text';
 
 // Page Components //------------------------------------------------------------
-@import "includes/components/footer";
-@import "includes/components/header";
-@import "includes/components/nav";
+@import 'includes/components/footer';
+@import 'includes/components/header';
+@import 'includes/components/nav';
 
 // Sitemap //------------------------------------------------------------------
-@import "includes/components/sitemap";
+@import 'includes/components/sitemap';
 
 // Styleguide //------------------------------------------------------------------
-@import "includes/components/styleguide";
+@import 'includes/components/styleguide';

@@ -8,14 +8,14 @@ class Column extends Component {
       column: PropTypes.array.isRequired,
       columnWidth: PropTypes.number.isRequired,
       margin: PropTypes.number.isRequired,
-      imgMargin: PropTypes.number.isRequired
+      imgMargin: PropTypes.number.isRequired,
     };
   }
 
   render() {
     const listStyles = {
       width: this.props.columnWidth,
-      marginRight: this.props.margin
+      marginRight: this.props.margin,
     };
     return (
       <div className="grid-column" style={listStyles}>

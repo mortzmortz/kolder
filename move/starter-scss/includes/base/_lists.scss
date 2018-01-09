@@ -4,7 +4,7 @@ ul {
 }
 
 ul li:before {
-  content: "-";
+  content: '-';
   display: inline-block;
   color: $c-grey-mid;
   position: absolute;
@@ -15,9 +15,12 @@ ol {
   list-style: decimal inside;
 }
 
-ul ul, ul ol, ol ol, ol ul {
+ul ul,
+ul ol,
+ol ol,
+ol ul {
   margin: $space 0 $space $space-double;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 ul li:not(:last-child),

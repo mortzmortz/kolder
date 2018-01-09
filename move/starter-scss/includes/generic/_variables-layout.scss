@@ -1,28 +1,28 @@
 // Breakpoints used in _mixins-bp //---------------------------------------------------------
-$mobile-max :               480px;
-$tablet-portrait-min :      481px;
-$tablet-portrait-max :      840px;
-$tablet-landscape-min :     841px;
-$tablet-landscape-max :     1280px;
-$desktop-min :              1281px;
-$max-width-up :             1441px;
+$mobile-max: 480px;
+$tablet-portrait-min: 481px;
+$tablet-portrait-max: 840px;
+$tablet-landscape-min: 841px;
+$tablet-landscape-max: 1280px;
+$desktop-min: 1281px;
+$max-width-up: 1441px;
 
 // Container ------------------------------------------------------------------
-$max-width :                1440px;
+$max-width: 1440px;
 
 // Defaults -------------------------------------------------------------------
-$space :                    1rem;
-$space-and-half :           $space * 1.5;
-$space-double :             $space * 2;
-$space-quad :               $space * 4;
-$space-half :               $space / 2;
-$space-quarter :            $space / 4;
-$pad :                      1rem;
-$pad-and-half :             $pad * 1.5;
-$pad-double :               $pad * 2;
-$pad-quad :                 $pad * 4;
-$pad-half :                 $pad / 2;
-$pad-quarter :              $pad / 4;
+$space: 1rem;
+$space-and-half: $space * 1.5;
+$space-double: $space * 2;
+$space-quad: $space * 4;
+$space-half: $space / 2;
+$space-quarter: $space / 4;
+$pad: 1rem;
+$pad-and-half: $pad * 1.5;
+$pad-double: $pad * 2;
+$pad-quad: $pad * 4;
+$pad-half: $pad / 2;
+$pad-quarter: $pad / 4;
 
 // Border Radius --------------------------------------------------------------
-$br :                       3px;
+$br: 3px;

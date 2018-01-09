@@ -1,77 +1,107 @@
 const webpack = require('webpack');
+const path = require('path');
 const chalk = require('chalk');
+const StylelintPlugin = require('stylelint-webpack-plugin');
+const StylelintFormatter = require('stylelint-formatter-pretty');
 const PostCompilePlugin = require('post-compile-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const StatsPlugin = require('stats-webpack-plugin');
 const VisualizerPlugin = require('webpack-visualizer-plugin');
+const CodeframeFormatter = require('eslint-codeframe-formatter');
 const autoprefixer = require('autoprefixer');
+const flexbugsFixes = require('postcss-flexbugs-fixes');
 const options = require('./kolder.config');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
+const browserslist =
+  nodeEnv === 'production'
+    ? options.browserslist.production
+    : options.browserslist.development;
 
 const linter = {
   enforce: 'pre',
-  test: /\.(vue|js|jsx)$/,
+  test: /\.js$/,
   exclude: /node_modules/,
   loader: 'eslint-loader',
   options: {
+    formatter: CodeframeFormatter,
     cache: true,
-  }
+  },
 };
 
 // This is our JavaScript rule that specifies what to do with .js files.
-// set more babel plugin options in .babelrc (Vue production mode needs this file)
 const javascript = {
-  test: /\.(vue|js|jsx)$/,
+  test: /\.js$/,
   exclude: /node_modules/,
-  loader: 'babel-loader'
+  use: {
+    loader: 'babel-loader',
+    options: {
+      presets: [
+        [
+          'env',
+          {
+            modules: false,
+            useBuiltIns: 'usage',
+            debug: true,
+            targets: {
+              node: 'current',
+              browsers: browserslist,
+            },
+          },
+        ],
+        <%_ if (type === 'react') { -%>
+        'react',
+        <%_ } -%>
+      ],
+      plugins: ['transform-object-rest-spread', 'transform-class-properties'],
+    },
+  },
 };
-
-<%_ if (type === 'vue') { -%>
-const vue = {
-  test: /\.vue$/,
-  loader: 'vue-loader',
-};
-<%_ } -%>
 
 // This is our postCSS loader which gets fed into the styles loader.
 const postcss = {
   loader: 'postcss-loader',
   options: {
-    plugins: [
-      autoprefixer({ browsers: options.browserlist })
-    ]
-  }
+    sourceMap: true,
+    plugins: [flexbugsFixes, autoprefixer({ browsers: browserslist })],
+  },
 };
 
 // This is our sass/css loader. It handles files that are require('sth.scss') or import 'sth.scss'
 const styles = {
   test: /\.(scss)$/,
-  use: ExtractTextPlugin.extract([
-    {
-      loader: 'css-loader',
-      options: {
-        sourceMap: true,
-        url: false
-      }
-    },
-    postcss,
-    {
-      loader: 'sass-loader',
-      options: {
-        sourceMap: true
-      }
-    }
-  ])
+  use: ['css-hot-loader'].concat(
+    ExtractTextPlugin.extract([
+      {
+        loader: 'css-loader',
+        options: {
+          sourceMap: true,
+          url: false,
+        },
+      },
+      postcss,
+      {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: true,
+        },
+      },
+    ]),
+  ),
 };
 
 const devServer = {
   port: options.devServerPort,
+  contentBase: options.contentBase,
+  watchContentBase: true,
   open: options.devServerOpenAuto,
+  openPage: options.devServerOpenPage,
   overlay: options.devServerOverlay,
+  compress: true,
   quiet: true,
-  stats: 'none'
+  stats: 'none',
 };
 
 const statsOptions = {
@@ -84,12 +114,11 @@ const statsOptions = {
 };
 
 // We can also use plugins - this one will compress the crap out of our JS
-const uglify = new webpack.optimize.UglifyJsPlugin({ // eslint-disable-line
-  compress: { warnings: false }
-});
+const uglify = new UglifyJsPlugin();
 
 const cleanDist = new CleanWebpackPlugin(options.path, {
-  verbose: false
+  root: path.resolve(options.contentBase),
+  verbose: false,
 });
 
 const statsOutput = new StatsPlugin('stats.json', {
@@ -101,11 +130,15 @@ const visualizer = new VisualizerPlugin({
   filename: './stats.html'
 });
 
-// todo add babili-webpack-plugin
-// https://www.npmjs.com/package/babili-webpack-plugin
-// https://survivejs.com/webpack/optimizing/minifying/
+const Stylelint = new StylelintPlugin({
+  configFile: './.stylelintrc.js',
+  syntax: 'scss',
+  failOnError: false,
+  quiet: false,
+  formatter: StylelintFormatter,
+});
 
-const postCompile = new PostCompilePlugin((stats) => {
+const postCompile = new PostCompilePlugin(stats => {
   process.stdout.write('\x1Bc');
 
   if (stats.hasErrors() || stats.hasWarnings()) {
@@ -120,8 +153,16 @@ const postCompile = new PostCompilePlugin((stats) => {
     }
   } else {
     console.log(stats.toString(statsOptions.stats));
-    nodeEnv === 'development' && console.log(chalk.bold(`\n> Open http://localhost:${options.devServerPort}\n`));
-    nodeEnv === 'production' && console.log(`\nThe ${chalk.magenta(options.path)} folder is ready to be published.\n`);
+    nodeEnv === 'development' &&
+      console.log(
+        chalk.bold(`\n> Open http://localhost:${options.devServerPort}\n`),
+      );
+    nodeEnv === 'production' &&
+      console.log(
+        `\nThe ${chalk.magenta(
+          options.path,
+        )} folder is ready to be published.\n`,
+      );
     console.log(chalk.bgGreen.black(' DONE '), 'Compiled successfully!');
     console.log();
     nodeEnv === 'production' && process.exit(0);
@@ -130,59 +171,57 @@ const postCompile = new PostCompilePlugin((stats) => {
 
 // Put it all together
 const config = {
-  entry: options.entry,
+  entry:
+    nodeEnv === 'production'
+      ? options.entry.production
+      : options.entry.development,
 
   // Once things are done, we kick it out to a file.
   output: {
-    filename: `./${options.path}/${options.filename.js}`
+    path: path.resolve(options.contentBase),
+    filename: path.join(options.path, options.filename.js),
+    publicPath: '/',
   },
 
   // Pass the rules for our JS and our styles
   module: {
-    rules: [linter, javascript, styles<%_ if (type === 'vue') { -%>, vue<%_ } -%>],
+    rules: [linter, javascript, styles],
   },
 
   plugins: [
     // if (process.env.NODE_ENV !== 'production') console.log('...') is minified away in production mode
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
+      'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
     }),
     // Here is where we tell it to output our css to a separate file
     new ExtractTextPlugin({
-      filename: `./${options.path}/${options.filename.css}`,
-      allChunks: true
+      filename: path.join(options.path, options.filename.css),
+      allChunks: true,
     }),
-    postCompile
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    postCompile,
   ],
-
   performance: {
-    hints: false
+    hints: false,
   },
-
-  devtool: 'source-map',
-
+  devtool: 'inline-source-map',
   devServer,
-
-  <%_ if (type === 'vue') { -%>
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.common.js'
-    }
-  }<%_ } -%>
-
-  <%_ if (type === 'react') { -%>
-  resolve: {
-    extensions: ['.js', '.jsx']
-  }
-  <%_ } -%>
 };
+
+if (nodeEnv === 'development') {
+  const namedModules = new webpack.NamedModulesPlugin();
+  config.plugins.push(namedModules);
+}
 
 if (nodeEnv === 'production') {
   // no source maps in production mode
   config.devtool = '';
   // add custom plugins in production mode
-  config.plugins.push(uglify, cleanDist, statsOutput, visualizer);
+  config.plugins.push(uglify, cleanDist);
+  options.statsOutput && config.plugins.push(statsOutput, visualizer);
 }
+
+options.stylelint.enable && config.plugins.push(Stylelint);
 
 // Avoid deprecation warnings
 process.noDeprecation = true;

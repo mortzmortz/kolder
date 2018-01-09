@@ -3,7 +3,13 @@ export const closest = (el, selector) => {
   let elm = el;
 
   // find vendor prefix
-  ['matches', 'webkitMatchesSelector', 'mozMatchesSelector', 'msMatchesSelector', 'oMatchesSelector'].some((fn) => {
+  [
+    'matches',
+    'webkitMatchesSelector',
+    'mozMatchesSelector',
+    'msMatchesSelector',
+    'oMatchesSelector',
+  ].some(fn => {
     if (typeof document.body[fn] === 'function') {
       matchesFn = fn;
       return true;

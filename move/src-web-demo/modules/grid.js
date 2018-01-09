@@ -12,7 +12,9 @@ export default class Grid {
     this.options = { ...defaults, ...options };
 
     if (!this.options.images) {
-      throw new Error('option missing: Providing an url or object of images is a must to initialize the grid!');
+      throw new Error(
+        'option missing: Providing an url or object of images is a must to initialize the grid!',
+      );
     }
 
     this.margin = this.options.horizontalMargin;
@@ -28,7 +30,9 @@ export default class Grid {
 
   init(selector) {
     if (!selector) {
-      throw new Error('option missing: Providing a selector is a must to initialize the grid!');
+      throw new Error(
+        'option missing: Providing a selector is a must to initialize the grid!',
+      );
     }
     this.container = document.querySelector(selector);
 
@@ -41,7 +45,9 @@ export default class Grid {
         this.initGrid();
         break;
       default:
-        throw new Error('wrong type: Type must be an url (string) or an array of images (object)');
+        throw new Error(
+          'wrong type: Type must be an url (string) or an array of images (object)',
+        );
     }
   }
 
@@ -53,12 +59,12 @@ export default class Grid {
   getImages(url) {
     fetch(url)
       .then(blob => blob.json())
-      .then((images) => {
+      .then(images => {
         this.images = travelObject(images, this.pathToImages);
         this.initGrid();
       })
-      .catch((err) => {
-        throw new Error('Could not fetch the images.');
+      .catch(error => {
+        console.error('Could not fetch the images.', error);
       });
   }
 
@@ -83,7 +89,8 @@ export default class Grid {
     this.columnWidth = columns === 1 ? this.imgWidth * 2 : this.imgWidth;
     let html = '';
     // clear grid
-    while (this.container.firstChild) this.container.removeChild(this.container.firstChild);
+    while (this.container.firstChild)
+      this.container.removeChild(this.container.firstChild);
     // build columns
     let i = 0;
     while (i < columns) {
@@ -100,7 +107,8 @@ export default class Grid {
   setContainer(columns) {
     // handle mobile: 1 column
     const w = columns === 1 ? this.outerWidth * 2 : this.outerWidth;
-    const containerW = columns === 1 ? this.imgWidth * 2 : (columns * w) - this.imgMargin;
+    const containerW =
+      columns === 1 ? this.imgWidth * 2 : columns * w - this.imgMargin;
     // give container a fixed width
     this.container.style.width = `${containerW}px`;
   }
@@ -118,7 +126,7 @@ export default class Grid {
     const targets = Array.from(this.container.querySelectorAll('li'));
     let listCount = 0;
     // distribute image elements to lists from left to right line by line
-    this.images.forEach((image) => {
+    this.images.forEach(image => {
       const html = this.getImageHTML(image);
       if (listCount < targets.length - 1) {
         targets[listCount].innerHTML += html;
@@ -145,7 +153,9 @@ export default class Grid {
 
   getColumnHTML(last) {
     const marginRight = last ? 0 : this.imgMargin;
-    return `<li class="grid-column" style="width:${this.columnWidth}px;margin-right:${marginRight}px;"></li>`;
+    return `<li class="grid-column" style="width:${
+      this.columnWidth
+    }px;margin-right:${marginRight}px;"></li>`;
   }
 
   getImageHTML(image) {

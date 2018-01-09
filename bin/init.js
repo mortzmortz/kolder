@@ -20,10 +20,10 @@ module.exports = co.wrap(function*(options) {
           name: 'currentDir',
           type: 'confirm',
           message: `You did not provide a directory. Confirm to overwrite all files at ${chalk.yellow(
-            tildify(dest)
+            tildify(dest),
           )}.`,
-          default: false
-        }
+          default: false,
+        },
       ]);
       if (!currentDir) {
         throw new AppError('> Aborted.');
@@ -33,13 +33,14 @@ module.exports = co.wrap(function*(options) {
             name: 'safeOverWrite',
             type: 'confirm',
             message: `Sorry, I have to ask again. Anyway, sure overwrite?`,
-            default: false
-          }
+            default: false,
+          },
         ]);
         if (!safeOverWrite) {
           throw new AppError('> Aborted.');
         } else {
           $.rm('-rf', `${dest}/*`);
+          $.rm('-rf', `${dest}/.*`);
         }
       }
     } else {
@@ -48,10 +49,10 @@ module.exports = co.wrap(function*(options) {
           name: 'overWrite',
           type: 'confirm',
           message: `Directory ${chalk.yellow(
-            tildify(dest)
+            tildify(dest),
           )} already exists, confirm to overwrite it anyway?`,
-          default: false
-        }
+          default: false,
+        },
       ]);
       if (!overWrite) {
         throw new AppError('> Aborted.');
@@ -61,13 +62,14 @@ module.exports = co.wrap(function*(options) {
             name: 'safeOverWrite',
             type: 'confirm',
             message: `Sorry, I have to ask again. Anyway, sure overwrite?`,
-            default: false
-          }
+            default: false,
+          },
         ]);
         if (!safeOverWrite) {
           throw new AppError('> Aborted.');
         } else {
           $.rm('-rf', `${dest}/*`);
+          $.rm('-rf', `${dest}/.*`);
         }
       }
     }
@@ -81,18 +83,16 @@ module.exports = co.wrap(function*(options) {
       description: `My new Project`,
       starter: false,
       webDemo: false,
-      vueStandaloneDemo: false,
       reactDemo: false,
-      unit: false
     },
-    options
+    options,
   );
 
   // --type=plain
   if (defaults.type === 'plain') {
     usePrompts = false;
     console.log(
-      '> Detected plain project type from CLI arguments, skipped prompts.'
+      '> Detected plain project type from CLI arguments, skipped prompts.',
     );
   }
 
@@ -100,12 +100,12 @@ module.exports = co.wrap(function*(options) {
     {
       name: 'name',
       default: defaults.name,
-      message: 'Choose the name for your new project:'
+      message: 'Choose the name for your new project:',
     },
     {
       name: 'description',
       default: defaults.description,
-      message: 'Briefly describe your new project:'
+      message: 'Briefly describe your new project:',
     },
     {
       name: 'type',
@@ -114,74 +114,53 @@ module.exports = co.wrap(function*(options) {
       choices: [
         {
           name: 'Plain Project',
-          value: 'plain'
+          value: 'plain',
         },
         {
           name: 'Web Project',
-          value: 'web'
-        },
-        {
-          name: 'Vue App',
-          value: 'vue'
+          value: 'web',
         },
         {
           name: 'React App',
-          value: 'react'
-        }
-      ]
+          value: 'react',
+        },
+      ],
     },
     {
       name: 'webDemo',
       message: 'Want to add a short JavaScript Demo?',
       type: 'confirm',
       default: false,
-      when: answers => answers.type === 'web'
-    },
-    {
-      name: 'vueStandaloneDemo',
-      message: 'Want to add a short JavaScript Demo?',
-      type: 'confirm',
-      default: false,
-      when: answers => answers.type === 'vue'
+      when: answers => answers.type === 'web',
     },
     {
       name: 'reactDemo',
       message: 'Want to add a short JavaScript Demo?',
       type: 'confirm',
       default: false,
-      when: answers => answers.type === 'react'
+      when: answers => answers.type === 'react',
     },
     {
       name: 'starter',
       message: 'Want to add Basic Styles?',
       type: 'confirm',
       default: false,
-      when: answers => answers.type !== 'plain'
+      when: answers => answers.type !== 'plain',
     },
-    {
-      name: 'unit',
-      message: 'Do you want to add unit tests with AVA?',
-      type: 'confirm',
-      default: false,
-      when: answers => answers.type === 'web'
-    }
   ];
 
   const kopyOptions = {
     filters: {
       'demo/styles.html': 'starter',
-      'demo-scss/**': '!starter && (webDemo || vueStandaloneDemo || reactDemo)',
+      'demo-scss/**': '!starter && (webDemo || reactDemo)',
       'src-plain/**': 'type === "plain"',
       'src-web/**': 'type === "web"',
-      'src-vue/**': 'type === "vue"',
       'src-react/**': 'type === "react"',
       'starter-scss/**': 'starter',
       'starter-assets/**': 'starter',
       'src-web-demo/**': 'webDemo',
-      'src-vue-demo/**': 'vueStandaloneDemo',
       'src-react-demo/**': 'reactDemo',
-      'test/**': 'unit'
-    }
+    },
   };
 
   if (usePrompts === false) {
@@ -196,13 +175,17 @@ module.exports = co.wrap(function*(options) {
   for (const file of files) {
     console.log(`${chalk.green('Generating')} · ${file}`);
   }
-  for (const file of ['gitignore', 'editorconfig', 'eslintrc.js']) {
+  for (const file of [
+    'gitignore',
+    'editorconfig',
+    'eslintrc.js',
+    'babelrc',
+    'stylelintrc.js',
+  ]) {
     move(dest, file, `.${file}`);
   }
 
-  if (merged.type === 'vue') {
-    move(dest, 'src-vue', 'src');
-  } else if (merged.type === 'react') {
+  if (merged.type === 'react') {
     move(dest, 'src-react', 'src');
   } else if (merged.type === 'web') {
     move(dest, 'src-web', 'src');
@@ -213,15 +196,12 @@ module.exports = co.wrap(function*(options) {
   if (merged.starter) {
     move(dest, 'starter-scss', 'src/styles');
     move(dest, 'starter-assets', 'assets');
-  } else if (merged.webDemo || merged.vueStandaloneDemo || merged.reactDemo) {
+  } else if (merged.webDemo || merged.reactDemo) {
     move(dest, 'demo-scss', 'src/styles');
   }
 
   if (merged.webDemo) {
     move(dest, 'src-web-demo', 'src/javascripts');
-  }
-  if (merged.vueStandaloneDemo) {
-    move(dest, 'src-vue-demo', 'src/javascripts');
   }
   if (merged.reactDemo) {
     move(dest, 'src-react-demo', 'src/javascripts');
@@ -229,26 +209,26 @@ module.exports = co.wrap(function*(options) {
 
   console.log('\n> Installing dependencies for project:');
   install({
-    cwd: dest
+    cwd: dest,
   });
 
   console.log(
     `\n${chalk.bgGreen.black(
-      ' DONE '
-    )} Successfully generated into ${chalk.yellow(tildify(dest))}!\n`
+      ' DONE ',
+    )} Successfully generated into ${chalk.yellow(tildify(dest))}!\n`,
   );
 
   console.log(chalk.green('- To get started:'));
   console.log();
   merged.name && console.log(`  cd ${merged.name}`);
-  console.log('  yarn dev\n');
+  console.log('  yarn start\n');
 
   console.log(chalk.green('- To build for production:'));
   console.log('\n  yarn build\n');
 
   if (merged.name) {
     console.log(
-      chalk.bold(`For more info, please view ${merged.name}/README.md\n`)
+      chalk.bold(`For more info, please view ${merged.name}/README.md\n`),
     );
   } else {
     console.log(chalk.bold(`For more info, please view README.md\n`));

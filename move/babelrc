@@ -1,0 +1,27 @@
+{
+    "env": {
+        "test": {
+            "presets": [
+                [
+                    "env",
+                    {
+                        "modules": "commonjs",
+                        "useBuiltIns": "usage",
+                        "debug": false,
+                        "targets": {
+                            "browsers": [
+                                "last 2 versions",
+                                "Explorer >= 10",
+                                "Android >= 4.1"
+                            ]
+                        }
+                    }
+                ]
+            ],
+            "plugins": [
+                "transform-object-rest-spread",
+                "transform-class-properties"
+            ]
+        }
+    }
+}

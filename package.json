@@ -1,25 +1,25 @@
 {
-  "name": "kolder",
-  "version": "0.1.11",
-  "description": "Create new projects with no build configuration.",
-  "repository": "mortzmortz/kolder",
-  "bin": {
-    "kolder": "bin/kolder.js"
-  },
-  "files": ["bin", "lib", "move"],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Gerion Herbst",
-  "license": "MIT",
-  "dependencies": {
-    "chalk": "^2.0.1",
-    "co": "^4.6.0",
-    "inquirer": "^3.0.6",
-    "kopy": "^5.1.1",
-    "shelljs": "^0.7.7",
-    "tildify": "^1.2.0",
-    "yargs": "^8.0.2",
-    "yarn-install": "^0.3.0"
-  }
+    "name": "kolder",
+    "version": "0.1.11",
+    "description": "Create projects with no build configuration.",
+    "repository": "mortzmortz/kolder",
+    "bin": {
+        "kolder": "bin/kolder.js"
+    },
+    "files": ["bin", "lib", "move"],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Gerion Herbst",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^2.0.1",
+        "co": "^4.6.0",
+        "inquirer": "^3.0.6",
+        "kopy": "^5.1.1",
+        "shelljs": "^0.7.7",
+        "tildify": "^1.2.0",
+        "yargs": "^8.0.2",
+        "yarn-install": "^0.5.1"
+    }
 }

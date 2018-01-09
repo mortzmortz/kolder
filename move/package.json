@@ -1,100 +1,76 @@
 {
-  "private": true,
-  "name": "<%= name %>",
-  "description": "<%= description %>",
-  "version": "0.0.0",
-  "repository": {},
-  "scripts": {
-    <%_ if (type === 'vue') { -%>
-    "dev": "webpack-dev-server --inline --hot",
-    <%_  } else { -%>
-    "dev": "webpack-dev-server",
-    <%_ } -%>
-    "build": "cross-env NODE_ENV=production webpack -p",
-    "lint": "eslint src/javascripts/ webpack.*.js; exit 0",
-    <%_ if (unit) { -%>
-    "test": "ava --verbose"
-    <%_ } else { -%>
-    "test": "echo nada"
-    <%_ } -%>
-  },
-  "babel": {
-    "presets": [
-      ["es2015", {"modules": false}],
-      "stage-0"<%_ if (type === 'react') { -%>,
-      "react"<%_ } %><%_ if (unit) { -%>,
-      "@ava/stage-4"<%_ } %>
-    ]
-  },
-  <%_ if (unit) { -%>
-  "ava": {
-    "require": ["babel-register"]
-  },
-  <%_ } -%>
-  "dependencies": {
-    <%_ if (type === 'vue') { -%>
-    "vue": "^2.2.2"
-    <%_ } -%>
-    <%_ if (type === 'react') { -%>
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
-    <%_ } -%>
-  },
-  "devDependencies": {
-    "autoprefixer": "^7.1.2",
-    <%_ if (unit) { -%>
-    "ava": "^0.21.0",
-    <%_ } -%>
-    "babel-core": "^6.25.0",
-    <%_ if (type === 'react') { -%>
-    "babel-eslint": "^7.2.1",
-    <%_ } -%>
-    "babel-loader": "^7.1.1",
-    <%_ if (type === 'vue') { -%>
-    "babel-plugin-transform-runtime": "^6.23.0",
-    <%_ } -%>
-    "babel-preset-es2015": "^6.24.1",
-    <%_ if (type === 'react') { -%>
-    "babel-preset-react": "^6.23.0",
-    <%_ } -%>
-    "babel-preset-stage-0": "^6.24.1",
-    <%_ if (unit) { -%>
-    "babel-register": "^6.24.1",
-    <%_ } -%>
-    <%_ if (type === 'vue') { -%>
-    "babel-runtime": "^6.23.0",
-    <%_ } -%>
-    "chalk": "^2.0.1",
-    "clean-webpack-plugin": "^0.1.16",
-    "cross-env": "^5.0.1",
-    "css-loader": "^0.28.4",
-    "eslint": "^3.19.0",
-    "eslint-codeframe-formatter": "^1.0.2",
-    "eslint-config-airbnb": "^15.0.2",
-    <%_ if (type === 'vue') { -%>
-    "eslint-config-vue": "^2.0.2",
-    <%_ } -%>
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.0.0",
-    "eslint-plugin-react": "^7.1.0",
-    <%_ if (type === 'vue') { -%>
-    "eslint-plugin-vue": "^2.0.1",
-    <%_ } -%>
-    "extract-text-webpack-plugin": "^3.0.0",
-    "node-sass-chokidar": "^0.0.3",
-    "post-compile-webpack-plugin": "^0.1.1",
-    "postcss-cli": "^4.1.0",
-    "postcss-loader": "^2.0.6",
-    "sass-loader": "^6.0.6",
-    "stats-webpack-plugin": "^0.6.1",
-    <%_ if (type === 'vue') { -%>
-    "vue-loader": "^12.2.2",
-    "vue-template-compiler": "^2.2.2",
-    <%_ } -%>
-    "webpack": "^3.3.0",
-    "webpack-dev-server": "^2.5.1",
-    "webpack-visualizer-plugin": "^0.1.11"
-  },
-  "license": "MIT"
+    "private": true,
+    "name": "<%= name %>",
+    "description": "<%= description %>",
+    "version": "0.0.0",
+    "repository": {},
+    "scripts": {
+        "start": "webpack-dev-server --hot",
+        "build": "cross-env NODE_ENV=production webpack -p",
+        "lint": "eslint src/",
+        "test": "cross-env BABEL_ENV=test jest",
+        "test:watch": "cross-env BABEL_ENV=test jest --watchAll"
+    },
+    "dependencies": {
+        "babel-polyfill": "^7.0.0-beta.2"
+    },
+    "devDependencies": {
+        "autoprefixer": "^7.2.4",
+        "babel-core": "^6.26.0",
+        "babel-eslint": "^8.0.1",
+        "babel-jest": "^22.0.3",
+        "babel-loader": "^7.1.2",
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-env": "^1.6.0",
+        <%_ if (type === 'react') { -%>
+        "babel-preset-react": "^6.24.1",
+        <%_ } -%>
+        "chalk": "^2.1.0",
+        "clean-webpack-plugin": "^0.1.16",
+        "cross-env": "^5.0.5",
+        "css-hot-loader": "^1.3.4",
+        "css-loader": "^0.28.7",
+        "eslint": "^4.6.1",
+        "eslint-codeframe-formatter": "^1.0.2",
+        "eslint-config-prettier": "^2.6.0",
+        "eslint-config-standard": "^10.2.1",
+        <%_ if (type === 'react') { -%>
+        "eslint-config-standard-react": "^5.0.0",
+        <%_ } -%>
+        "eslint-import-resolver-webpack": "^0.8.3",
+        "eslint-loader": "^1.9.0",
+        "eslint-plugin-import": "^2.7.0",
+        <%_ if (type === 'react') { -%>
+        "eslint-plugin-jsx-a11y": "5.1.1",
+        <%_ } -%>
+        "eslint-plugin-node": "^5.2.0",
+        "eslint-plugin-prettier": "^2.3.1",
+        "eslint-plugin-promise": "^3.5.0",
+        <%_ if (type === 'react') { -%>
+        "eslint-plugin-react": "7.4.0",
+        <%_ } -%>
+        "eslint-plugin-standard": "^3.0.1",
+        "extract-text-webpack-plugin": "^3.0.0",
+        "jest": "^22.0.3",
+        "node-sass-chokidar": "^0.0.3",
+        "npm-run-all": "^4.1.1",
+        "post-compile-webpack-plugin": "^0.1.1",
+        "postcss-flexbugs-fixes": "^3.2.0",
+        "postcss-loader": "^2.0.6",
+        "prettier": "^1.8.0",
+        "prettier-eslint": "^8.2.2",
+        "prettier-stylelint": "^0.4.2",
+        "sass-loader": "^6.0.6",
+        "stats-webpack-plugin": "^0.6.1",
+        "stylelint": "^8.1.1",
+        "stylelint-config-standard": "^18.0.0",
+        "stylelint-formatter-pretty": "^1.0.3",
+        "stylelint-webpack-plugin": "^0.9.0",
+        "uglifyjs-webpack-plugin": "^1.1.1",
+        "webpack": "^3.6.0",
+        "webpack-dev-server": "2.9.5",
+        "webpack-visualizer-plugin": "^0.1.11"
+    },
+    "license": "MIT"
 }

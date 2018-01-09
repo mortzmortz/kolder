@@ -1,15 +1,15 @@
 button,
-input[type="submit"],
-input[type="button"],
-input[type="reset"] {
+input[type='submit'],
+input[type='button'],
+input[type='reset'] {
   -webkit-appearance: button;
 }
 
 a.button,
 button,
-input[type="submit"],
-input[type="button"],
-input[type="reset"] {
+input[type='submit'],
+input[type='button'],
+input[type='reset'] {
   display: inline-flex;
   vertical-align: top;
   font-size: 1rem;
@@ -40,9 +40,9 @@ input[type="reset"] {
 
 a.button.button-primary,
 button.button-primary,
-input[type="submit"].button-primary,
-input[type="button"].button-primary,
-input[type="reset"].button-primary {
+input[type='submit'].button-primary,
+input[type='button'].button-primary,
+input[type='reset'].button-primary {
   border-color: $c-black;
   background-color: $c-black;
   color: $c-white;
@@ -56,14 +56,14 @@ input[type="reset"].button-primary {
 
 a.button.button-text,
 button.button-text,
-input[type="submit"].button-text,
-input[type="button"].button-text,
-input[type="reset"].button-text {
+input[type='submit'].button-text,
+input[type='button'].button-text,
+input[type='reset'].button-text {
   border: none;
   background-color: transparent;
   color: $c-ci;
-  font-size: .8rem;
-  letter-spacing: .0625em;
+  font-size: 0.8rem;
+  letter-spacing: 0.0625em;
   text-transform: uppercase;
 
   &:hover,

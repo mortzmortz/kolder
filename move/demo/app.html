@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0"/>
     <title>kolder demo</title>
-    <link rel="stylesheet" href="../dist/styles.css" type="text/css">
+    <link rel="stylesheet" href="../dist/kolder.bundle.css" type="text/css">
     <style>
         <%_ if (webDemo) { -%>
         * {
@@ -70,9 +70,7 @@
 </head>
 <body>
 
-    <%_ if (type === 'vue') { -%>
-    <div class="head-kolder">kolder vue</div>
-    <%_  } else if (type === 'react') { -%>
+    <%_ if (type === 'react') { -%>
     <div class="head-kolder">kolder react</div>
     <%_  } else if (type === 'web') { -%>
     <div class="head-kolder">kolder demo</div>
@@ -82,6 +80,6 @@
     <div id="demo"></div>
     <%_ } -%>
     
-<script type="text/javascript" async src="../dist/bundle.js"></script>
+<script type="text/javascript" defer src="../dist/kolder.bundle.js"></script>
 </body>
 </html>

@@ -1,17 +1,15 @@
 @mixin fontFace($family, $src, $style:normal, $weight:normal) {
-    @font-face {
-        font-family: $family;
-        src: url('#{$src}.woff2') format('woff2'),
-        url('#{$src}.woff') format('woff');
-
-        font-style: $style;
-        font-weight: $weight;
-    }
+  @font-face {
+    font-family: $family;
+    src: url('#{$src}.woff2') format('woff2'),
+      url('#{$src}.woff') format('woff');
+    font-style: $style;
+    font-weight: $weight;
+  }
 }
 
-
 @mixin font($family, $weight:normal, $size:inherit) {
-    font-family: $family, sans-serif;
-    font-weight: $weight;
-    font-size: $size;
+  font-family: $family, sans-serif;
+  font-weight: $weight;
+  font-size: $size;
 }

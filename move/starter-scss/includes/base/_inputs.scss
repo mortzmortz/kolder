@@ -3,7 +3,7 @@ label {
   color: $c-grey;
   display: block;
   font-weight: $font-weight-5;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 label:not(:last-child) {
@@ -11,8 +11,8 @@ label:not(:last-child) {
 }
 
 // Inputs //-------------------------------------------------------------------
-input[type="text"],
-input[type="email"],
+input[type='text'],
+input[type='email'],
 textarea {
   display: block;
   width: 100%;

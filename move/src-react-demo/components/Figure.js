@@ -5,7 +5,7 @@ class Figure extends Component {
   static get propTypes() {
     return {
       url: PropTypes.string.isRequired,
-      imgMargin: PropTypes.number.isRequired
+      imgMargin: PropTypes.number.isRequired,
     };
   }
 
@@ -13,18 +13,18 @@ class Figure extends Component {
     super();
     this.styles = {
       figure: {
-        backgroundColor: '#E8E8E8'
+        backgroundColor: '#E8E8E8',
       },
       img: {
-        width: '100%'
-      }
+        width: '100%',
+      },
     };
   }
 
   render() {
     const figureStyles = {
       ...this.styles.figure,
-      marginBottom: this.props.imgMargin
+      marginBottom: this.props.imgMargin,
     };
     return (
       <figure className="loaded" style={figureStyles}>

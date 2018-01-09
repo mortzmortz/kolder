@@ -1,20 +1,27 @@
 const options = require('./kolder.config');
 
 module.exports = {
-  "env": {
-    "es6": true,
-    "node": true,
-    "browser": true
+  parser: 'babel-eslint',
+  env: {
+    es6: true,
+    node: true,
+    browser: true,
+    jest: true
   },
-  <%_ if (type === 'vue') { -%>
-  "extends": "vue",
-  "plugins": ["vue"],
-  <%_ } else if (type === 'react') { -%>
-  "extends": "airbnb",
-  "plugins": ["react"],
-  "parser": "babel-eslint",
-  <%_ } else if (type === 'web' || 'plain') { -%>
-  "extends": "airbnb",
+  <%_ if (type === 'react') { -%>
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  plugins: ['prettier', 'react'],
+  extends: ['standard', 'standard-react', 'prettier'],
+  <%_ } else { -%>
+  plugins: ['prettier'],
+  extends: ['standard', 'prettier'],
   <%_ } -%>
-  "rules": options.eslint
-}
+  rules: options.eslint,
+  settings: {
+    'import/resolver': 'webpack'
+  }
+};

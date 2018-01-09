@@ -14,7 +14,9 @@ export default class Lazer {
 
   init() {
     this.container = this.options.selector;
-    this.targets = Array.from(this.container.querySelectorAll(this.options.target));
+    this.targets = Array.from(
+      this.container.querySelectorAll(this.options.target),
+    );
     this.parent = this.options.parent;
     this.classToAdd = this.options.classToAdd;
     this.time = this.options.time;
@@ -26,7 +28,7 @@ export default class Lazer {
     const classToAdd = this.classToAdd;
     const time = this.time;
 
-    this.targets.forEach((target) => {
+    this.targets.forEach(target => {
       target.addEventListener('load', () => {
         const parentElm = closest(target, parent);
         setTimeout(() => {

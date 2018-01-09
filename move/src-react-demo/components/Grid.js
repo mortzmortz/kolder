@@ -8,7 +8,7 @@ class Grid extends Component {
       margin: PropTypes.number,
       imgWidth: PropTypes.number,
       imgMargin: PropTypes.number,
-      url: PropTypes.string.isRequired
+      url: PropTypes.string.isRequired,
     };
   }
 
@@ -16,7 +16,7 @@ class Grid extends Component {
     return {
       margin: 48,
       imgWidth: 300,
-      imgMargin: 24
+      imgMargin: 24,
     };
   }
 
@@ -32,20 +32,20 @@ class Grid extends Component {
       margin: '0 auto',
       padding: 0,
       paddingTop: '80px',
-      listStyle: 'none'
+      listStyle: 'none',
     };
   }
 
   state = {
     columns: [],
-    containerWidth: 0
+    containerWidth: 0,
   };
 
   componentDidMount() {
     this.outerWidth = this.props.imgWidth + this.props.imgMargin;
     fetch(this.props.url)
       .then(blob => blob.json())
-      .then((data) => {
+      .then(data => {
         const images = data.data;
         this.images = images;
         this.setColumns();
@@ -55,26 +55,30 @@ class Grid extends Component {
 
   setColumns = () => {
     /**
-    * calculate the maximum columns we can set
-    * based on grid margin and image settings (width and margin)
-    */
+     * calculate the maximum columns we can set
+     * based on grid margin and image settings (width and margin)
+     */
     const maxW = window.innerWidth - this.props.margin;
     // avoid columns being zero
     const newColumns = Math.floor(maxW / this.outerWidth) || 1;
     if (this.columnCount !== newColumns) {
       this.columnCount = newColumns;
-      this.columnWidth = newColumns === 1 ? this.props.imgWidth * 2 : this.props.imgWidth;
+      this.columnWidth =
+        newColumns === 1 ? this.props.imgWidth * 2 : this.props.imgWidth;
       // handle mobile: 1 column
       const w = newColumns === 1 ? this.outerWidth * 2 : this.outerWidth;
-      const newContainerWidth = newColumns === 1 ? this.props.imgWidth * 2 : (newColumns * w) - this.props.imgMargin;
+      const newContainerWidth =
+        newColumns === 1
+          ? this.props.imgWidth * 2
+          : newColumns * w - this.props.imgMargin;
       this.setState({
-        containerWidth: newContainerWidth
+        containerWidth: newContainerWidth,
+        columns: [],
       });
 
-      this.state.columns = [];
       this.updateImageArr();
     }
-  }
+  };
 
   updateImageArr = () => {
     const newColArr = [...this.state.columns];
@@ -100,31 +104,30 @@ class Grid extends Component {
     });
 
     this.setState({
-      columns: newColArr
+      columns: newColArr,
     });
-  }
+  };
 
   render() {
     const containerStyle = {
       ...this.style,
-      width: this.state.containerWidth
+      width: this.state.containerWidth,
     };
     return (
       <div style={containerStyle}>
-        {
-          this.state.columns.map((column, index) => {
-            const margin = index !== (this.columnCount - 1) ? this.props.imgMargin : 0;
-            return (
-              <Column
-                key={`col-${index}`}
-                column={column}
-                columnWidth={this.columnWidth}
-                margin={margin}
-                imgMargin={this.props.imgMargin}
-              />
-            );
-          })
-        }
+        {this.state.columns.map((column, index) => {
+          const margin =
+            index !== this.columnCount - 1 ? this.props.imgMargin : 0;
+          return (
+            <Column
+              key={`col-${index}`}
+              column={column}
+              columnWidth={this.columnWidth}
+              margin={margin}
+              imgMargin={this.props.imgMargin}
+            />
+          );
+        })}
       </div>
     );
   }
