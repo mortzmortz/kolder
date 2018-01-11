@@ -3,6 +3,7 @@ const path = require('path');
 const chalk = require('chalk');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 const StylelintFormatter = require('stylelint-formatter-pretty');
+const WebpackPreBuildPlugin = require('pre-build-webpack');
 const PostCompilePlugin = require('post-compile-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -44,7 +45,7 @@ const javascript = {
           {
             modules: false,
             useBuiltIns: 'usage',
-            debug: true,
+            debug: false,
             targets: {
               node: 'current',
               browsers: browserslist,
@@ -109,8 +110,12 @@ const statsOptions = {
     chunks: false,
     children: false,
     modules: false,
-    colors: true
-  }
+    colors: true,
+    version: false,
+    cached: false,
+    hash: false,
+    timings: false,
+  },
 };
 
 // We can also use plugins - this one will compress the crap out of our JS
@@ -138,6 +143,14 @@ const Stylelint = new StylelintPlugin({
   formatter: StylelintFormatter,
 });
 
+const preCompile = new WebpackPreBuildPlugin(stats => {
+  if (nodeEnv === 'development') {
+    console.log(chalk.cyanBright(`Starting the development server...`));
+  } else if (nodeEnv === 'production') {
+    console.log(chalk.cyanBright(`Creating an optimized production build...`));
+  }
+});
+
 const postCompile = new PostCompilePlugin(stats => {
   process.stdout.write('\x1Bc');
 
@@ -145,27 +158,35 @@ const postCompile = new PostCompilePlugin(stats => {
     console.log(stats.toString('errors-only'));
     console.log();
     if (stats.hasErrors()) {
-      console.log(chalk.bgRed.black(' ERROR '), 'Compiled with errors!');
+      console.log(chalk.bgRedBright.black(' ERROR '), 'Compiled with errors!');
       nodeEnv === 'production' && process.exit(1);
     } else if (stats.hasWarnings()) {
-      console.log(chalk.bgYellow.black(' WARN '), 'Compiled with warnings!');
+      console.log(
+        chalk.bgYellowBright.black(' WARN '),
+        'Compiled with warnings!',
+      );
       nodeEnv === 'production' && process.exit(0);
     }
   } else {
     console.log(stats.toString(statsOptions.stats));
-    nodeEnv === 'development' &&
-      console.log(
-        chalk.bold(`\n> Open http://localhost:${options.devServerPort}\n`),
-      );
-    nodeEnv === 'production' &&
-      console.log(
-        `\nThe ${chalk.magenta(
-          options.path,
-        )} folder is ready to be published.\n`,
-      );
-    console.log(chalk.bgGreen.black(' DONE '), 'Compiled successfully!');
     console.log();
-    nodeEnv === 'production' && process.exit(0);
+    console.log(chalk.bgGreenBright.black(' DONE '), 'Compiled successfully!');
+    console.log();
+    if (nodeEnv === 'development') {
+      console.log(
+        `Development Server is running on http://localhost:${chalk.bold(
+          options.devServerPort,
+        )}`,
+      );
+    } else if (nodeEnv === 'production') {
+      console.log(
+        `The ${chalk.magentaBright(
+          options.path,
+        )} folder is ready to be published.`,
+      );
+      console.log();
+      process.exit(0);
+    }
   }
 });
 
@@ -199,6 +220,7 @@ const config = {
       allChunks: true,
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    preCompile,
     postCompile,
   ],
   performance: {
