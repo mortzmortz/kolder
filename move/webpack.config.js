@@ -143,9 +143,16 @@ const Stylelint = new StylelintPlugin({
   formatter: StylelintFormatter,
 });
 
+let devServerStart = true;
+
 const preCompile = new WebpackPreBuildPlugin(stats => {
   if (nodeEnv === 'development') {
-    console.log(chalk.cyanBright(`Starting the development server...`));
+    if (devServerStart) {
+      console.log(chalk.cyanBright(`Starting the development server...`));
+      devServerStart = false;
+    } else {
+      console.log(chalk.gray(`Compiling...`));
+    }
   } else if (nodeEnv === 'production') {
     console.log(chalk.cyanBright(`Creating an optimized production build...`));
   }
