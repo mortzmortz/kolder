@@ -13,7 +13,6 @@ module.exports = {
   devServerOpenAuto: false,
   devServerOpenPage: './',
   devServerOverlay: true,
-  statsOutput: false,
   browserslist: {
     development: [
       'Chrome >= 60',

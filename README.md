@@ -97,21 +97,9 @@ If you want to change it, make sure to adjust ESLint settings too.
 
 Projects using [eslint-config-standard](https://github.com/standard/eslint-config-standard).
 
-#### Module Statistics
-
-If `statsOutput` is activated in your config File, `yarn build` exports two statistic files, which give you an overview about your bundles.
-
 #### Webpack Dev Server
 
 Webpack Dev Server with Hot Reloading is already set up and can be started with `yarn start`.
-
-##### stats.json
-
-Use it with [Official Analyse Tool](http://webpack.github.io/analyse/)
-
-##### stats.html
-
-Shows stats with [Webpack Visualizer Plugin](https://chrisbateman.github.io/webpack-visualizer/)
 
 #### ENV Variable
 

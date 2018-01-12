@@ -8,8 +8,6 @@ const PostCompilePlugin = require('post-compile-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const StatsPlugin = require('stats-webpack-plugin');
-const VisualizerPlugin = require('webpack-visualizer-plugin');
 const CodeframeFormatter = require('eslint-codeframe-formatter');
 const autoprefixer = require('autoprefixer');
 const flexbugsFixes = require('postcss-flexbugs-fixes');
@@ -126,15 +124,6 @@ const cleanDist = new CleanWebpackPlugin(options.path, {
   verbose: false,
 });
 
-const statsOutput = new StatsPlugin('stats.json', {
-  chunkModules: true,
-  exclude: [/node_modules/]
-});
-
-const visualizer = new VisualizerPlugin({
-  filename: './stats.html'
-});
-
 const Stylelint = new StylelintPlugin({
   configFile: './.stylelintrc.js',
   syntax: 'scss',
@@ -248,7 +237,6 @@ if (nodeEnv === 'production') {
   config.devtool = '';
   // add custom plugins in production mode
   config.plugins.push(uglify, cleanDist);
-  options.statsOutput && config.plugins.push(statsOutput, visualizer);
 }
 
 options.stylelint.enable && config.plugins.push(Stylelint);
