@@ -151,6 +151,7 @@ const preCompile = new WebpackPreBuildPlugin(stats => {
       console.log(chalk.cyanBright(`Starting the development server...`));
       devServerStart = false;
     } else {
+      console.log('\x1Bc');
       console.log(chalk.gray(`Compiling...`));
     }
   } else if (nodeEnv === 'production') {
@@ -159,7 +160,7 @@ const preCompile = new WebpackPreBuildPlugin(stats => {
 });
 
 const postCompile = new PostCompilePlugin(stats => {
-  process.stdout.write('\x1Bc');
+  console.log('\x1Bc');
 
   if (stats.hasErrors() || stats.hasWarnings()) {
     console.log(stats.toString('errors-only'));
@@ -175,9 +176,7 @@ const postCompile = new PostCompilePlugin(stats => {
       nodeEnv === 'production' && process.exit(0);
     }
   } else {
-    console.log(stats.toString(statsOptions.stats));
-    console.log();
-    console.log(chalk.bgGreenBright.black(' DONE '), 'Compiled successfully!');
+    console.log(chalk.greenBright('Compiled successfully!'));
     console.log();
     if (nodeEnv === 'development') {
       console.log(
@@ -186,6 +185,8 @@ const postCompile = new PostCompilePlugin(stats => {
         )}`,
       );
     } else if (nodeEnv === 'production') {
+      console.log(stats.toString(statsOptions.stats));
+      console.log();
       console.log(
         `The ${chalk.magentaBright(
           options.path,

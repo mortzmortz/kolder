@@ -12,7 +12,10 @@
         "test:watch": "cross-env BABEL_ENV=test jest --watchAll"
     },
     "dependencies": {
-        "babel-polyfill": "^7.0.0-beta.2"
+        "babel-polyfill": "^7.0.0-beta.2"<%_ if (type === 'react') { -%>,
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0"
+        <%_ } -%>
     },
     "devDependencies": {
         "autoprefixer": "^7.2.4",
